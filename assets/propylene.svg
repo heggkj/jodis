@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+  <rect width="80" height="80" fill="#FFAB91" rx="12" />
+  <text x="40" y="36" font-size="20" font-family="Arial" fill="#000" text-anchor="middle">C₃H₆</text>
+  <text x="40" y="60" font-size="10" font-family="Arial" fill="#333" text-anchor="middle">Propylene</text>
+</svg>
