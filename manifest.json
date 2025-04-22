@@ -1,0 +1,10 @@
+
+{
+  "name": "Airgas Gas Converter",
+  "short_name": "Gas Converter",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#006272",
+  "theme_color": "#006272",
+  "icons": [{ "src": "assets/favicon.ico", "sizes": "64x64", "type": "image/x-icon" }]
+}

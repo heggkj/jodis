@@ -1,0 +1,45 @@
+
+.logo {
+  display: block;
+  margin: 0 auto 16px auto;
+  max-width: 145px;
+  height: auto;
+}
+.tip-box {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff9cc;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.tip-box i,
+.tip-icon {
+  font-size: 20px;
+  margin-right: 20px;
+  width: 24px;
+  height: 24px;
+}
+.pt-cell {
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  touch-action: manipulation;
+}
+.pt-cell.active {
+  outline: 3px solid #006272;
+  transform: scale(1.05);
+}
+.gas-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+button {
+  touch-action: manipulation;
+}

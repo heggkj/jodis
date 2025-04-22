@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Airgas Gas Converter</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#006272" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app-container">
+  <img src="assets/airgas-logo.png" alt="Airgas Logo" class="logo"/>
+
+  <div class="carousel-wrapper">
+    <div id="carousel" class="carousel">
+      <div class="pt-cell active" data-gas="oxygen"><img src="assets/oxygen.svg" alt="Oxygen" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="nitrogen"><img src="assets/nitrogen.svg" alt="Nitrogen" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="argon"><img src="assets/argon.svg" alt="Argon" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="carbon_dioxide"><img src="assets/carbon_dioxide.svg" alt="Carbon Dioxide" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="helium"><img src="assets/helium.svg" alt="Helium" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="hydrogen"><img src="assets/hydrogen.svg" alt="Hydrogen" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="acetylene"><img src="assets/acetylene.svg" alt="Acetylene" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="propane"><img src="assets/propane.svg" alt="Propane" class="gas-icon" /></div>
+      <div class="pt-cell" data-gas="propylene"><img src="assets/propylene.svg" alt="Propylene" class="gas-icon" /></div>
+    </div>
+  </div>
+
+  <label for="volume">Volume (ft³)</label>
+  <input type="number" id="volume" placeholder="Enter volume" />
+
+  <button id="convertButton" onclick="convertGas()">Convert</button>
+
+  <div class="result" id="result">Result: —</div>
+
+  <div class="gas-properties" id="gasProperties">
+    <h3 id="gasName">Oxygen</h3>
+    <ul>
+      <li id="boilingPoint">Boiling Point: —</li>
+      <li id="enthalpy">Enthalpy: —</li>
+      <li id="value0C">@0°C: —</li>
+      <li id="value15C">@15°C: —</li>
+      <li id="value20C">@20°C: —</li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <img src="assets/safety-icon.svg" alt="Safety Icon" class="tip-icon" />
+    <span id="safetyTip">Loading tip...</span>
+  </div>
+
+  <div class="footer">Fill Your Potential™</div>
+</div>
+<script src="script.js?v=12"></script>
+</body>
+</html>
