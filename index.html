@@ -15,6 +15,7 @@
 
   <div class="carousel-wrapper">
     <div id="carousel" class="carousel">
+      <!-- Gas selectors -->
       <div class="pt-cell active" data-gas="oxygen"><img src="assets/oxygen.svg" alt="Oxygen" class="gas-icon" /></div>
       <div class="pt-cell" data-gas="nitrogen"><img src="assets/nitrogen.svg" alt="Nitrogen" class="gas-icon" /></div>
       <div class="pt-cell" data-gas="argon"><img src="assets/argon.svg" alt="Argon" class="gas-icon" /></div>
@@ -27,20 +28,27 @@
     </div>
   </div>
 
-  <label>Convert From</label>
-  <div class="input-row">
-    <div class="toggle-buttons">
-      <button id="modeVolume" class="toggle-btn active" onclick="toggleInputMode('volume')">Volume</button>
-      <button id="modeMass" class="toggle-btn" onclick="toggleInputMode('mass')">Mass</button>
+  <div class="mode-input-row">
+    <div class="mode-toggle">
+      <input type="radio" id="modeVolume" name="mode" checked onclick="toggleInputMode('volume')">
+      <label for="modeVolume">Volume</label>
+      <input type="radio" id="modeMass" name="mode" onclick="toggleInputMode('mass')">
+      <label for="modeMass">Mass</label>
     </div>
     <input type="number" id="volume" placeholder="Enter value" />
   </div>
 
-  <label for="toUnit">Convert To</label>
-  <select id="toUnit"></select>
+  <div class="unit-row">
+    <label for="fromUnit" id="fromLabel">From (Volume):</label>
+    <select id="fromUnit"></select>
+  </div>
+
+  <div class="unit-row">
+    <label for="toUnit" id="toLabel">To (Mass):</label>
+    <select id="toUnit"></select>
+  </div>
 
   <button id="convertButton" onclick="convertGas()">Convert</button>
-
   <div class="result" id="result">Result: —</div>
 
   <div class="gas-properties" id="gasProperties">
