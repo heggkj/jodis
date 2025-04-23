@@ -37,19 +37,20 @@ select {
 }
 
 /* ---------- CARD ---------- */
-.app-container{
-  width:100%;
-  max-width:440px;
-  min-height:100vh;
-  overflow:auto;
-  display:flex;
-  flex-direction:column;
-  margin:0 auto;
-  padding:24px 20px 32px;
-  background:var(--card);
-  border-radius:var(--r);
-  box-shadow:var(--shadow);
-  box-sizing:border-box;
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+  padding: 16px 16px 20px; /* ⬅️ tighter vertical padding */
+  background: var(--card);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
 }
 
 /* ---------- HEADER ---------- */
@@ -61,7 +62,7 @@ select {
   overflow-y:hidden;
   margin-bottom:12px;
   padding:8px 12px;
-  height: 124px;
+  height: 112px;
 }
 .carousel{
   display:flex;
@@ -69,15 +70,16 @@ select {
 }
 .pt-cell{
   flex:0 0 auto;
-  width:92px;
-  height:92px;
+  width:84px;
+  height:84px;
+  padding:4px
   border-radius:12px;
   overflow:hidden;
   cursor:pointer;
   transition:.2s;
   touch-action:manipulation;
 }
-.pt-cell img{width:100%;height:100%;object-fit:cover}
+.pt-cell img{width:100%;height:100%;object-fit:contain}
 .pt-cell.active{outline:3px solid var(--airgas-teal);transform:scale(1.05)}
 
 /* ---------- FORM ---------- */
