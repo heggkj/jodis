@@ -1,11 +1,14 @@
 
 let currentGas = "oxygen";
-let inputMode = 'volume'; // volume or mass
+let inputMode = 'volume'; // 'volume' or 'mass'
+
+// Volume and Mass unit groupings
+const volumeUnits = ["liters", "gallons", "cubic_meters", "standard_cubic_feet"];
+const massUnits = ["kg", "pounds", "tons_metric", "tons_us"];
 
 function updateGasProperties(gas) {
   const g = gases[gas];
   console.log("Gas properties updated:", g);
-
   document.getElementById("gasName").innerText = g.name;
   document.getElementById("boilingPoint").innerText = "Boiling Point: " + g.boiling;
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
@@ -20,19 +23,34 @@ function updateGasProperties(gas) {
 
 function updateVolumeLabel(unit) {
   const label = unitLabels[unit] || unit;
-  console.log("Unit label updated:", label);
   document.getElementById("volumeUnitLabel").innerText = label;
 }
 
-function updateModeLabel() {
-  const label = document.getElementById("volumeModeLabel");
-  label.innerText = inputMode === 'volume' ? 'Volume' : 'Mass';
-  document.getElementById("volume").placeholder = inputMode === 'volume' ? "Enter volume" : "Enter mass";
+function updateModeUI() {
+  const volumeBtn = document.getElementById("modeVolume");
+  const massBtn = document.getElementById("modeMass");
+  volumeBtn.classList.toggle("active", inputMode === "volume");
+  massBtn.classList.toggle("active", inputMode === "mass");
+  document.getElementById("volume").placeholder = inputMode === "volume" ? "Enter volume" : "Enter mass";
 }
 
-function toggleInputMode() {
-  inputMode = inputMode === 'volume' ? 'mass' : 'volume';
-  updateModeLabel();
+function updateUnitDropdowns() {
+  const fromUnit = document.getElementById("fromUnit");
+  const toUnit = document.getElementById("toUnit");
+  const fromUnits = inputMode === 'volume' ? volumeUnits : massUnits;
+  const toUnits = inputMode === 'volume' ? massUnits : volumeUnits;
+
+  fromUnit.innerHTML = fromUnits.map(unit => `<option value="${unit}">${unitLabels[unit]}</option>`).join('');
+  toUnit.innerHTML = toUnits.map(unit => `<option value="${unit}">${unitLabels[unit]}</option>`).join('');
+
+  updateVolumeLabel(fromUnit.value);
+}
+
+function toggleInputMode(mode) {
+  inputMode = mode;
+  updateModeUI();
+  updateUnitDropdowns();
+
   const volumeInput = document.getElementById("volume");
   const resultBox = document.getElementById("result");
   if (volumeInput) volumeInput.value = "";
@@ -41,6 +59,7 @@ function toggleInputMode() {
 
 function convertGas() {
   const input = parseFloat(document.getElementById("volume").value);
+  const fromUnit = document.getElementById("fromUnit").value;
   const toUnit = document.getElementById("toUnit").value;
   if (isNaN(input)) {
     document.getElementById("result").innerText = "Please enter a valid number.";
@@ -51,14 +70,13 @@ function convertGas() {
   let convertedValue = 0;
 
   if (inputMode === 'volume') {
-    const m3 = input / 1000;
+    const m3 = convertVolume(input, fromUnit, "cubic_meters");
     const kg = m3 * gas.density;
     convertedValue = convertVolume(kg, "kg", toUnit);
   } else {
-    const kg = convertVolume(input, toUnit, "kg");
+    const kg = convertVolume(input, fromUnit, "kg");
     const m3 = kg / gas.density;
-    const liters = m3 * 1000;
-    convertedValue = convertVolume(liters, "liters", toUnit);
+    convertedValue = convertVolume(m3, "cubic_meters", toUnit);
   }
 
   const label = unitLabels[toUnit] || toUnit;
@@ -75,14 +93,11 @@ window.onload = () => {
       console.log("Gas selected:", el.dataset.gas);
       cells.forEach(c => c.classList.remove("active"));
       el.classList.add("active");
-
       currentGas = el.dataset.gas;
       updateGasProperties(currentGas);
-
       if (volumeInput) volumeInput.value = "";
       if (resultBox) resultBox.innerText = "Result: —";
     };
-
     el.addEventListener("click", selectGas);
     el.addEventListener("touchstart", selectGas);
   });
@@ -91,9 +106,9 @@ window.onload = () => {
     updateVolumeLabel(e.target.value);
   });
 
-  updateVolumeLabel(document.getElementById("fromUnit").value);
+  updateModeUI();
+  updateUnitDropdowns();
   updateGasProperties(currentGas);
-  updateModeLabel();
 
   const tips = [
     "Secure cylinders properly.",
