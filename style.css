@@ -1,3 +1,4 @@
+
 /* ---------- GLOBAL --------- */
 :root{
   --airgas-teal:#006272;
@@ -9,18 +10,36 @@
   font-family:"Segoe UI",system-ui,sans-serif;
 }
 
-/* full-height mobile-safe body */
-html,body{height:100%;margin:0;padding:0}
+/* full-height mobile-safe body + no scrolling */
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+
 body{
   background:var(--light);
-  display:flex;justify-content:center;align-items:flex-start;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:auto;
 }
 
 /* ---------- CARD ---------- */
 .app-container{
-  width:100%;max-width:440px;min-height:100vh;
-  margin:32px 0;padding:24px 20px 32px;
-  background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
+  width:100%;
+  max-width:440px;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  margin:0 auto;
+  padding:24px 20px 32px;
+  background:var(--card);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
   box-sizing:border-box;
 }
 
@@ -28,17 +47,24 @@ body{
 .logo{display:block;margin:0 auto 18px auto;max-width:160px;height:auto}
 
 /* ---------- CAROUSEL ---------- */
-.carousel-wrapper{overflow-x:auto;margin-bottom:12px;padding-bottom:4px}
 .carousel-wrapper{
   overflow-x:auto;
+  overflow-y:hidden;
   margin-bottom:12px;
-  padding:8px 8px;        /* ↑↑ new: top-bottom padding */
-  /* if you prefer a fixed height instead, use:  height:108px; */
+  padding:8px 12px;
 }
-.carousel{display:flex;gap:12px}
+.carousel{
+  display:flex;
+  gap:12px;
+}
 .pt-cell{
-  flex:0 0 auto;width:92px;height:92px;
-  border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s;
+  flex:0 0 auto;
+  width:92px;
+  height:92px;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
   touch-action:manipulation;
 }
 .pt-cell img{width:100%;height:100%;object-fit:cover}
@@ -47,13 +73,24 @@ body{
 /* ---------- FORM ---------- */
 label{display:block;margin:14px 0 6px;font-weight:600;color:#444}
 input[type=number]{
-  width:100%;padding:11px;font-size:16px;
-  border:1px solid #ccc;border-radius:8px;
+  width:100%;
+  padding:11px;
+  font-size:16px;
+  border:1px solid #ccc;
+  border-radius:8px;
 }
 button{
-  width:100%;margin:18px 0 6px;padding:13px;
-  background:var(--airgas-teal);color:#fff;font-size:16px;font-weight:600;
-  border:none;border-radius:8px;cursor:pointer;touch-action:manipulation;
+  width:100%;
+  margin:18px 0 6px;
+  padding:13px;
+  background:var(--airgas-teal);
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  touch-action:manipulation;
 }
 button:active{background:var(--airgas-teal-dark)}
 
@@ -62,14 +99,22 @@ button:active{background:var(--airgas-teal-dark)}
 
 /* ---------- GAS INFO ---------- */
 .gas-properties{
-  background:#f8f9fa;border-radius:var(--r);padding:18px;margin-bottom:12px
+  background:#f8f9fa;
+  border-radius:var(--r);
+  padding:18px;
+  margin-bottom:12px;
 }
 .gas-properties h3{margin:0 0 8px;color:var(--airgas-teal)}
 
 /* ---------- SAFETY ---------- */
 .tip-box{
-  display:flex;align-items:center;gap:12px;
-  background:#fff8cc;border-radius:var(--r);padding:10px 14px;font-size:14px
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#fff8cc;
+  border-radius:var(--r);
+  padding:10px 14px;
+  font-size:14px;
 }
 .tip-icon{width:24px;height:24px}
 
