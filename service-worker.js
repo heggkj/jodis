@@ -1,9 +1,11 @@
 
-const CACHE = 'airgas-v10';
+const CACHE = 'airgas-v11';
 const ASSETS = [
   'index.html',
   'style.css',
   'script.js',
+  'gasData.js',
+  'conversion.js',
   'manifest.json',
   'service-worker.js',
   'assets/favicon.ico',
