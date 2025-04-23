@@ -1,7 +1,6 @@
 
-// script.js
-
 let currentGas = "oxygen";
+let inputMode = 'volume'; // volume or mass
 
 function updateGasProperties(gas) {
   const g = gases[gas];
@@ -10,6 +9,13 @@ function updateGasProperties(gas) {
   document.getElementById("gasName").innerText = g.name;
   document.getElementById("boilingPoint").innerText = "Boiling Point: " + g.boiling;
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
+
+  const v0 = document.getElementById("value0C");
+  if (g.values && g.values.length > 0 && v0) {
+    v0.innerText = "@0°C: " + g.values[0];
+  } else if (v0) {
+    v0.innerText = "@0°C: —";
+  }
 }
 
 function updateVolumeLabel(unit) {
@@ -18,32 +24,45 @@ function updateVolumeLabel(unit) {
   document.getElementById("volumeUnitLabel").innerText = label;
 }
 
+function updateModeLabel() {
+  const label = document.getElementById("volumeModeLabel");
+  label.innerText = inputMode === 'volume' ? 'Volume' : 'Mass';
+  document.getElementById("volume").placeholder = inputMode === 'volume' ? "Enter volume" : "Enter mass";
+}
+
+function toggleInputMode() {
+  inputMode = inputMode === 'volume' ? 'mass' : 'volume';
+  updateModeLabel();
+  const volumeInput = document.getElementById("volume");
+  const resultBox = document.getElementById("result");
+  if (volumeInput) volumeInput.value = "";
+  if (resultBox) resultBox.innerText = "Result: —";
+}
+
 function convertGas() {
   const input = parseFloat(document.getElementById("volume").value);
-  const fromUnit = document.getElementById("fromUnit").value;
   const toUnit = document.getElementById("toUnit").value;
-
   if (isNaN(input)) {
     document.getElementById("result").innerText = "Please enter a valid number.";
     return;
   }
 
   const gas = gases[currentGas];
-  let convertedValue;
+  let convertedValue = 0;
 
-  if (["kg", "tons_metric", "tons_us", "pounds"].includes(fromUnit) ||
-      ["kg", "tons_metric", "tons_us", "pounds"].includes(toUnit)) {
-    const volumeInM3 = convertVolume(input, fromUnit, "cubic_meters");
-    const weightKg = volumeInM3 * gas.density;
-    convertedValue = convertVolume(weightKg, "kg", toUnit);
+  if (inputMode === 'volume') {
+    const m3 = input / 1000;
+    const kg = m3 * gas.density;
+    convertedValue = convertVolume(kg, "kg", toUnit);
   } else {
-    convertedValue = convertVolume(input, fromUnit, toUnit);
+    const kg = convertVolume(input, toUnit, "kg");
+    const m3 = kg / gas.density;
+    const liters = m3 * 1000;
+    convertedValue = convertVolume(liters, "liters", toUnit);
   }
 
   const label = unitLabels[toUnit] || toUnit;
-  const resultText = `Result: ${convertedValue.toFixed(2)} ${label}`;
-  document.getElementById("result").innerText = resultText;
-  console.log("Conversion result:", resultText);
+  document.getElementById("result").innerText = `Result: ${convertedValue.toFixed(2)} ${label}`;
 }
 
 window.onload = () => {
@@ -60,14 +79,8 @@ window.onload = () => {
       currentGas = el.dataset.gas;
       updateGasProperties(currentGas);
 
-      if (volumeInput) {
-        volumeInput.value = "";
-        console.log("Volume input cleared");
-      }
-      if (resultBox) {
-        resultBox.innerText = "Result: —";
-        console.log("Result text reset");
-      }
+      if (volumeInput) volumeInput.value = "";
+      if (resultBox) resultBox.innerText = "Result: —";
     };
 
     el.addEventListener("click", selectGas);
@@ -80,22 +93,7 @@ window.onload = () => {
 
   updateVolumeLabel(document.getElementById("fromUnit").value);
   updateGasProperties(currentGas);
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
-};
-
-  document.getElementById("fromUnit").addEventListener("change", e => {
-    updateVolumeLabel(e.target.value);
-  });
-
-  updateVolumeLabel(document.getElementById("fromUnit").value);
-  updateGasProperties(currentGas);
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
+  updateModeLabel();
 
   const tips = [
     "Secure cylinders properly.",
@@ -112,5 +110,9 @@ window.onload = () => {
   const tipBox = document.getElementById("safetyTip");
   if (tipBox) {
     tipBox.innerText = tips[Math.floor(Math.random() * tips.length)];
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
   }
 };
