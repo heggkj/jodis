@@ -20,19 +20,3 @@ function convertVolume(inputValue, fromUnit, toUnit) {
   const liters = inputValue * unitConversions[fromUnit];
   return liters / unitConversions[toUnit];
 }
-
-// Human-readable labels
-const unitLabels = {
-  "liters": "liters",
-  "gallons": "gallons",
-  "kg": "kilograms",
-  "tons_metric": "metric tons",
-  "tons_us": "US tons",
-  "pounds": "pounds",
-  "standard_cubic_feet": "scf",
-  "cubic_meters": "m³"
-};
-
-if (typeof module !== "undefined") {
-  module.exports = { convertVolume, unitLabels };
-}
