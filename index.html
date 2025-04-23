@@ -28,10 +28,34 @@
     </div>
   </div>
 
-  <label for="volume">Volume (ft³)</label>
-  <input type="number" id="volume" placeholder="Enter volume" />
+<label for="unitInput">Volume (<span id="volumeUnitLabel">liters</span>)</label>
+<input type="number" id="volume" placeholder="Enter volume" />
 
-  <button id="convertButton" onclick="convertGas()">Convert</button>
+<label for="fromUnit">From unit</label>
+<select id="fromUnit">
+  <option value="liters" selected>Liters</option>
+  <option value="gallons">Gallons</option>
+  <option value="kg">Kilograms</option>
+  <option value="tons_metric">Tons (Metric)</option>
+  <option value="tons_us">Tons (US)</option>
+  <option value="pounds">Pounds</option>
+  <option value="standard_cubic_feet">SCF</option>
+  <option value="cubic_meters">Cubic Meters</option>
+</select>
+
+<label for="toUnit">To unit</label>
+<select id="toUnit">
+  <option value="liters" selected>Liters</option>
+  <option value="gallons">Gallons</option>
+  <option value="kg">Kilograms</option>
+  <option value="tons_metric">Tons (Metric)</option>
+  <option value="tons_us">Tons (US)</option>
+  <option value="pounds">Pounds</option>
+  <option value="standard_cubic_feet">SCF</option>
+  <option value="cubic_meters">Cubic Meters</option>
+</select>
+
+<button id="convertButton" onclick="convertGas()">Convert</button>
 
   <div class="result" id="result">Result: —</div>
 
