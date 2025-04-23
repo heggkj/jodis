@@ -6,16 +6,17 @@ let currentGas = "oxygen";
 function updateGasProperties(gas) {
   const g = gases[gas];
   console.log("Gas properties updated:", g);
+
   document.getElementById("gasName").innerText = g.name;
   document.getElementById("boilingPoint").innerText = "Boiling Point: " + g.boiling;
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
-  document.getElementById("value0C").innerText = "@0°C: " + (g.values ? g.values[0] : "—");
 
-  // Hide value15C and value20C if they exist in the DOM
-  const v15 = document.getElementById("value15C");
-  const v20 = document.getElementById("value20C");
-  if (v15) v15.style.display = "none";
-  if (v20) v20.style.display = "none";
+  const value0C = document.getElementById("value0C");
+  if (g.values && g.values.length > 0 && value0C) {
+    value0C.innerText = "@0°C: " + g.values[0];
+  } else if (value0C) {
+    value0C.innerText = "@0°C: —";
+  }
 }
 
 function updateVolumeLabel(unit) {
