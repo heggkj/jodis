@@ -28,7 +28,11 @@
   </div>
 
   <div class="form-row">
-    <label for="volume">Volume (<span id="volumeUnitLabel">liters</span>)</label>
+    <label for="volume">
+      <button onclick="toggleInputMode()" style="margin-right: 8px;">Toggle</button>
+      <span id="volumeModeLabel">Volume</span> (<span id="volumeUnitLabel">liters</span>)
+    </label>
+
     <input type="number" id="volume" placeholder="Enter volume" />
   </div>
 
