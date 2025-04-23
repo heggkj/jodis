@@ -27,28 +27,17 @@
     </div>
   </div>
 
-  <div class="form-row">
-    <label for="volume">
-      <button onclick="toggleInputMode()" style="margin-right: 8px;">Toggle</button>
-      <span id="volumeModeLabel">Volume</span> (<span id="volumeUnitLabel">liters</span>)
-    </label>
-
-    <input type="number" id="volume" placeholder="Enter volume" />
+<div class="form-row">
+  <div id="modeToggle" style="display:flex; gap:4px;">
+    <button id="modeVolume" class="toggle-btn active" onclick="toggleInputMode('volume')">Volume</button>
+    <button id="modeMass" class="toggle-btn" onclick="toggleInputMode('mass')">Mass</button>
   </div>
+</div>
 
-  <div class="form-row">
-    <label for="fromUnit">From unit</label>
-    <select id="fromUnit">
-      <option value="liters" selected>Liters</option>
-      <option value="gallons">Gallons</option>
-      <option value="kg">Kilograms</option>
-      <option value="tons_metric">Tons (Metric)</option>
-      <option value="tons_us">Tons (US)</option>
-      <option value="pounds">Pounds</option>
-      <option value="standard_cubic_feet">SCF</option>
-      <option value="cubic_meters">Cubic Meters</option>
-    </select>
-  </div>
+<div class="form-row">
+  <label for="volume"><span id="volumeModeLabel">Volume</span> (<span id="volumeUnitLabel">liters</span>)</label>
+  <input type="number" id="volume" />
+</div>
 
   <div class="form-row">
     <label for="toUnit">To unit</label>
