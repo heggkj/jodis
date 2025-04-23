@@ -40,6 +40,42 @@
   height: 100%;
   object-fit: contain;
 }
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #f4f4f4;
+}
+
+.app-container {
+  max-width: 480px;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.carousel-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.carousel {
+  display: flex;
+  gap: 10px;
+}
+
+.pt-cell {
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
 button {
   touch-action: manipulation;
 }
