@@ -28,8 +28,8 @@ function updateGasProperties(gas) {
 }
 
 function updateLabels() {
-  const x = inputMode === "volume" ? "Volume" : "Mass";
-  const y = inputMode === "volume" ? "Mass" : "Volume";
+  const x = inputMode === "volume" ? "Vol" : "Mass";
+  const y = inputMode === "volume" ? "Mass" : "Vol.";
   document.getElementById("fromLabel").innerText = `From (${x}):`;
   document.getElementById("toLabel").innerText = `To (${y}):`;
 }
