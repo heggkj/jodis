@@ -27,15 +27,16 @@
     </div>
   </div>
 
+  <label>Convert From</label>
   <div class="input-row">
     <div class="toggle-buttons">
       <button id="modeVolume" class="toggle-btn active" onclick="toggleInputMode('volume')">Volume</button>
       <button id="modeMass" class="toggle-btn" onclick="toggleInputMode('mass')">Mass</button>
     </div>
-    <input type="number" id="volume" placeholder="Enter volume" />
+    <input type="number" id="volume" placeholder="Enter value" />
   </div>
 
-  <label for="toUnit">Convert to</label>
+  <label for="toUnit">Convert To</label>
   <select id="toUnit"></select>
 
   <button id="convertButton" onclick="convertGas()">Convert</button>
@@ -47,7 +48,6 @@
     <ul>
       <li id="boilingPoint">Boiling Point: —</li>
       <li id="enthalpy">Enthalpy: —</li>
-      <li id="value0C">@0°C: —</li>
     </ul>
   </div>
 
