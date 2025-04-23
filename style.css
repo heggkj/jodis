@@ -29,6 +29,12 @@ body{
 
 /* ---------- CAROUSEL ---------- */
 .carousel-wrapper{overflow-x:auto;margin-bottom:12px;padding-bottom:4px}
+.carousel-wrapper{
+  overflow-x:auto;
+  margin-bottom:12px;
+  padding:8px 0;        /* ↑↑ new: top-bottom padding */
+  /* if you prefer a fixed height instead, use:  height:108px; */
+}
 .carousel{display:flex;gap:12px}
 .pt-cell{
   flex:0 0 auto;width:92px;height:92px;
