@@ -27,6 +27,21 @@ body{
   -webkit-overflow-scrolling:auto;
 }
 
+.toggle-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--airgas-teal);
+  background: white;
+  color: var(--airgas-teal);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.toggle-btn.active {
+  background: var(--airgas-teal);
+  color: white;
+}
+
 select {
   width: 100%;
   padding: 10px;
