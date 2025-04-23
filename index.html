@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,34 +27,40 @@
     </div>
   </div>
 
-<label for="unitInput">Volume (<span id="volumeUnitLabel">liters</span>)</label>
-<input type="number" id="volume" placeholder="Enter volume" />
+  <div class="form-row">
+    <label for="volume">Volume (<span id="volumeUnitLabel">liters</span>)</label>
+    <input type="number" id="volume" placeholder="Enter volume" />
+  </div>
 
-<label for="fromUnit">From unit</label>
-<select id="fromUnit">
-  <option value="liters" selected>Liters</option>
-  <option value="gallons">Gallons</option>
-  <option value="kg">Kilograms</option>
-  <option value="tons_metric">Tons (Metric)</option>
-  <option value="tons_us">Tons (US)</option>
-  <option value="pounds">Pounds</option>
-  <option value="standard_cubic_feet">SCF</option>
-  <option value="cubic_meters">Cubic Meters</option>
-</select>
+  <div class="form-row">
+    <label for="fromUnit">From unit</label>
+    <select id="fromUnit">
+      <option value="liters" selected>Liters</option>
+      <option value="gallons">Gallons</option>
+      <option value="kg">Kilograms</option>
+      <option value="tons_metric">Tons (Metric)</option>
+      <option value="tons_us">Tons (US)</option>
+      <option value="pounds">Pounds</option>
+      <option value="standard_cubic_feet">SCF</option>
+      <option value="cubic_meters">Cubic Meters</option>
+    </select>
+  </div>
 
-<label for="toUnit">To unit</label>
-<select id="toUnit">
-  <option value="liters" selected>Liters</option>
-  <option value="gallons">Gallons</option>
-  <option value="kg">Kilograms</option>
-  <option value="tons_metric">Tons (Metric)</option>
-  <option value="tons_us">Tons (US)</option>
-  <option value="pounds">Pounds</option>
-  <option value="standard_cubic_feet">SCF</option>
-  <option value="cubic_meters">Cubic Meters</option>
-</select>
+  <div class="form-row">
+    <label for="toUnit">To unit</label>
+    <select id="toUnit">
+      <option value="liters" selected>Liters</option>
+      <option value="gallons">Gallons</option>
+      <option value="kg">Kilograms</option>
+      <option value="tons_metric">Tons (Metric)</option>
+      <option value="tons_us">Tons (US)</option>
+      <option value="pounds">Pounds</option>
+      <option value="standard_cubic_feet">SCF</option>
+      <option value="cubic_meters">Cubic Meters</option>
+    </select>
+  </div>
 
-<button id="convertButton" onclick="convertGas()">Convert</button>
+  <button id="convertButton" onclick="convertGas()">Convert</button>
 
   <div class="result" id="result">Result: —</div>
 
@@ -65,8 +70,6 @@
       <li id="boilingPoint">Boiling Point: —</li>
       <li id="enthalpy">Enthalpy: —</li>
       <li id="value0C">@0°C: —</li>
-      <li id="value15C">@15°C: —</li>
-      <li id="value20C">@20°C: —</li>
     </ul>
   </div>
 
@@ -77,10 +80,9 @@
 
   <div class="footer">Fill Your Potential™</div>
 </div>
-  
+
 <script src="gasData.js"></script>
 <script src="conversion.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
