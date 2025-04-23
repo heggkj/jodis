@@ -40,8 +40,8 @@ select {
 .app-container{
   width:100%;
   max-width:440px;
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
+  overflow:auto;
   display:flex;
   flex-direction:column;
   margin:0 auto;
@@ -91,7 +91,7 @@ input[type=number]{
 }
 button{
   width:100%;
-  margin:18px 0 6px;
+  margin:12px 0 8px;
   padding:13px;
   background:var(--airgas-teal);
   color:#fff;
@@ -125,7 +125,12 @@ button{
 button:active{background:var(--airgas-teal-dark)}
 
 /* ---------- RESULT ---------- */
-.result{margin:10px 0 22px;text-align:center;font-size:20px;color:#333}
+.result {
+  margin:8px 0 16px;
+  text-align:center;
+  font-size:20px;
+  color:#333
+}
 
 /* ---------- GAS INFO ---------- */
 .gas-properties{
