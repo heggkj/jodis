@@ -1,22 +1,39 @@
+// conversion.js (refactored for extensibility)
 
-// conversion.js
-
-// Supported units and their base conversion to liters (or base gas density unit)
-const unitConversions = {
-  "liters": 1,
-  "gallons": 3.78541,
-  "kg": 1, // depends on gas density, handled separately
-  "tons_metric": 1000,
-  "tons_us": 907.18474,
-  "pounds": 0.453592,
-  "standard_cubic_feet": 28.3168,
-  "cubic_meters": 1000
+const volumeUnits = {
+  liters: { label: "Liters", toLiters: 1 },
+  gallons: { label: "Gallons", toLiters: 3.78541 },
+  standard_cubic_feet: { label: "SCF", toLiters: 28.3168 },
+  cubic_meters: { label: "Cubic Meters", toLiters: 1000 }
 };
 
-// Conversion logic
+const massUnits = {
+  kg: { label: "Kilograms", toKg: 1 },
+  pounds: { label: "Pounds", toKg: 0.453592 },
+  tons_metric: { label: "Tons (Metric)", toKg: 1000 },
+  tons_us: { label: "Tons (US)", toKg: 907.18474 }
+};
+
+const allUnits = {
+  ...Object.fromEntries(Object.entries(volumeUnits).map(([k, v]) => [k, { ...v, type: "volume" }])),
+  ...Object.fromEntries(Object.entries(massUnits).map(([k, v]) => [k, { ...v, type: "mass" }]))
+};
+
+// General-purpose conversion
 function convertVolume(inputValue, fromUnit, toUnit) {
   if (fromUnit === toUnit) return inputValue;
 
-  const liters = inputValue * unitConversions[fromUnit];
-  return liters / unitConversions[toUnit];
+  const from = allUnits[fromUnit];
+  const to = allUnits[toUnit];
+  if (!from || !to) throw new Error("Unknown unit");
+
+  const base = from.toLiters || from.toKg;
+  const target = to.toLiters || to.toKg;
+
+  const valueInBase = inputValue * base;
+  return valueInBase / target;
+}
+
+if (typeof module !== "undefined") {
+  module.exports = { convertVolume, volumeUnits, massUnits, allUnits };
 }
