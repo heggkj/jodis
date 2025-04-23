@@ -1,24 +1,11 @@
 // Airgas Gas Converter App
-// Version: 1.0.3
+// Version: 1.0.4
 // Last updated: 2025-04-23
 
-console.log("Airgas Gas Converter App - Version 1.0.3");
+console.log("Airgas Gas Converter App - Version 1.0.4");
 
 let currentGas = "oxygen";
 let inputMode = "volume";
-
-const volumeUnits = ["liters", "gallons", "cubic_meters", "standard_cubic_feet"];
-const massUnits = ["kg", "pounds", "tons_metric", "tons_us"];
-const unitLabels = {
-  liters: "Liters",
-  gallons: "Gallons",
-  cubic_meters: "Cubic Meters",
-  standard_cubic_feet: "SCF",
-  kg: "Kilograms",
-  pounds: "Pounds",
-  tons_metric: "Tons (Metric)",
-  tons_us: "Tons (US)"
-};
 
 function updateGasProperties(gas) {
   const g = gases[gas];
@@ -27,8 +14,12 @@ function updateGasProperties(gas) {
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
 }
 
+function getLabel(unit) {
+  return allUnits[unit]?.label || unit;
+}
+
 function updateLabels() {
-  const x = inputMode === "volume" ? "Vol" : "Mass";
+  const x = inputMode === "volume" ? "Vol." : "Mass";
   const y = inputMode === "volume" ? "Mass" : "Vol.";
   document.getElementById("fromLabel").innerText = `From (${x}):`;
   document.getElementById("toLabel").innerText = `To (${y}):`;
@@ -38,10 +29,10 @@ function updateDropdowns() {
   const fromUnit = document.getElementById("fromUnit");
   const toUnit = document.getElementById("toUnit");
 
-  const fromOptions = (inputMode === "volume" ? volumeUnits : massUnits)
-    .map(u => `<option value="${u}">${unitLabels[u]}</option>`).join('');
-  const toOptions = (inputMode === "volume" ? massUnits : volumeUnits)
-    .map(u => `<option value="${u}">${unitLabels[u]}</option>`).join('');
+  const fromOptions = (inputMode === "volume" ? Object.keys(volumeUnits) : Object.keys(massUnits))
+    .map(u => `<option value="${u}">${getLabel(u)}</option>`).join('');
+  const toOptions = (inputMode === "volume" ? Object.keys(massUnits) : Object.keys(volumeUnits))
+    .map(u => `<option value="${u}">${getLabel(u)}</option>`).join('');
 
   fromUnit.innerHTML = fromOptions;
   toUnit.innerHTML = toOptions;
@@ -66,18 +57,22 @@ function convertGas() {
 
   const gas = gases[currentGas];
   let convertedValue = 0;
+  let logDetails = "";
 
   if (inputMode === 'volume') {
     const m3 = convertVolume(input, fromUnit, "cubic_meters");
     const kg = m3 * gas.density;
     convertedValue = convertVolume(kg, "kg", toUnit);
+    logDetails = `Volume Mode: ${input} ${fromUnit} -> ${m3.toFixed(4)} m³ -> ${kg.toFixed(4)} kg using density ${gas.density} -> ${convertedValue.toFixed(4)} ${toUnit}`;
   } else {
     const kg = convertVolume(input, fromUnit, "kg");
     const m3 = kg / gas.density;
     convertedValue = convertVolume(m3, "cubic_meters", toUnit);
+    logDetails = `Mass Mode: ${input} ${fromUnit} -> ${kg.toFixed(4)} kg -> ${m3.toFixed(4)} m³ using density ${gas.density} -> ${convertedValue.toFixed(4)} ${toUnit}`;
   }
 
-  document.getElementById("result").innerText = `Result: ${convertedValue.toFixed(2)} ${unitLabels[toUnit]}`;
+  console.log(logDetails);
+  document.getElementById("result").innerText = `Result: ${convertedValue.toFixed(2)} ${getLabel(toUnit)}`;
 }
 
 window.onload = () => {
