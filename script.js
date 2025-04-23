@@ -52,7 +52,7 @@ window.onload = () => {
   const cells = document.querySelectorAll(".pt-cell");
 
   cells.forEach(el => {
-    el.addEventListener("click", () => {
+    const selectGas = () => {
       console.log("Gas selected:", el.dataset.gas);
       cells.forEach(c => c.classList.remove("active"));
       el.classList.add("active");
@@ -68,10 +68,23 @@ window.onload = () => {
         resultBox.innerText = "Result: —";
         console.log("Result text reset");
       }
-    });
+    };
 
-    el.addEventListener("touchstart", () => el.click());
+    el.addEventListener("click", selectGas);
+    el.addEventListener("touchstart", selectGas);
   });
+
+  document.getElementById("fromUnit").addEventListener("change", e => {
+    updateVolumeLabel(e.target.value);
+  });
+
+  updateVolumeLabel(document.getElementById("fromUnit").value);
+  updateGasProperties(currentGas);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+};
 
   document.getElementById("fromUnit").addEventListener("change", e => {
     updateVolumeLabel(e.target.value);
