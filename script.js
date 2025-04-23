@@ -10,13 +10,6 @@ function updateGasProperties(gas) {
   document.getElementById("gasName").innerText = g.name;
   document.getElementById("boilingPoint").innerText = "Boiling Point: " + g.boiling;
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
-
-  const value0C = document.getElementById("value0C");
-  if (g.values && g.values.length > 0 && value0C) {
-    value0C.innerText = "@0°C: " + g.values[0];
-  } else if (value0C) {
-    value0C.innerText = "@0°C: —";
-  }
 }
 
 function updateVolumeLabel(unit) {
