@@ -9,6 +9,7 @@ const ASSETS = [
   'assets/favicon.ico',
   'assets/airgas-logo.png',
   'assets/safety-icon.svg',
+  'assets/safety-icon.png',
   'assets/oxygen.svg',
   'assets/nitrogen.svg',
   'assets/argon.svg',
