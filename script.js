@@ -1,3 +1,8 @@
+// Airgas Gas Converter App
+// Version: 1.0.0
+// Last updated: 2025-04-23
+
+console.log("Airgas Gas Converter App - Version 1.0.0");
 
 let currentGas = "oxygen";
 let inputMode = 'volume'; // 'volume' or 'mass'
