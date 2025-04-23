@@ -1,8 +1,8 @@
 // Airgas Gas Converter App
-// Version: 1.0.1
+// Version: 1.0.2
 // Last updated: 2025-04-23
 
-console.log("Airgas Gas Converter App - Version 1.0.1");
+console.log("Airgas Gas Converter App - Version 1.0.2");
 
 let currentGas = "oxygen";
 let inputMode = 'volume';
@@ -16,18 +16,6 @@ function updateGasProperties(gas) {
   document.getElementById("gasName").innerText = g.name;
   document.getElementById("boilingPoint").innerText = "Boiling Point: " + g.boiling;
   document.getElementById("enthalpy").innerText = "Enthalpy: " + g.enthalpy;
-
-  const v0 = document.getElementById("value0C");
-  if (g.values && g.values.length > 0 && v0) {
-    v0.innerText = "@0°C: " + g.values[0];
-  } else if (v0) {
-    v0.innerText = "@0°C: —";
-  }
-}
-
-function updateVolumeLabel(unit) {
-  const label = unitLabels[unit] || unit;
-  document.getElementById("volumeUnitLabel").innerText = label;
 }
 
 function updateModeUI() {
@@ -42,7 +30,6 @@ function updateToDropdown() {
   const toUnit = document.getElementById("toUnit");
   const toUnits = inputMode === 'volume' ? massUnits : volumeUnits;
   toUnit.innerHTML = toUnits.map(unit => `<option value="${unit}">${unitLabels[unit]}</option>`).join('');
-  updateVolumeLabel(inputMode === 'volume' ? 'liters' : 'kg');
 }
 
 function toggleInputMode(mode) {
